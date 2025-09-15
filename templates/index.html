@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Default Prediction</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <div class="container">
+    <a class="navbar-brand" href="/">GXBoost Demo</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="mb-4 text-center">Customer Default Prediction</h1>
+
+  <!-- Form nhập dữ liệu -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Nhập thông tin khách hàng</h5>
+    </div>
+    <div class="card-body">
+      <form method="POST" action="/predict">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Age</label>
+            <input type="number" name="age" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Monthly Income</label>
+            <input type="number" name="MonthlyIncome" class="form-control" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Debt Ratio</label>
+            <input type="number" step="0.01" name="DebtRatio" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Number of Open Credit Lines</label>
+            <input type="number" name="NumberOfOpenCreditLinesAndLoans" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Number of Dependents</label>
+            <input type="number" name="NumberOfDependents" class="form-control" required>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-success">Dự đoán</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hiển thị kết quả -->
+  {% if prediction is defined %}
+  <div class="alert alert-info">
+    <strong>Kết quả dự đoán:</strong>
+    {% if prediction == 1 %}
+      Khách hàng có nguy cơ vỡ nợ.
+    {% else %}
+      Khách hàng an toàn.
+    {% endif %}
+  </div>
+  {% endif %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
